@@ -1,0 +1,26 @@
+instruction: |
+  You are a system administrator investigating a security incident. Your task is to:
+  
+  1. Analyze web server access logs in /var/log/apache/access.log to identify suspicious activity
+  2. Extract all IP addresses that made more than 50 requests in a single hour
+  3. Create a monitoring script that tracks failed SSH login attempts from /var/log/auth.log
+  4. Generate a security report in JSON format containing:
+     - Top 5 most active IP addresses with request counts
+     - List of suspicious IPs (>50 requests/hour)
+     - Failed SSH login attempts grouped by IP
+     - Summary statistics (total requests, unique IPs, failed logins)
+  
+  The final report should be saved as /app/security_report.json
+  
+  Additional requirements:
+  - Use only standard Unix tools (grep, awk, sed, sort, uniq, etc.)
+  - Handle log rotation and compressed files (.gz)
+  - Ensure the script is executable and can be run multiple times
+  - Include proper error handling for missing files
+
+author_email: assessment@afterquery.com
+difficulty: intermediate
+tags: [bash, linux, log-analysis, security, monitoring, json]
+max_agent_timeout_sec: 300
+max_test_timeout_sec: 60
+interactive: false
