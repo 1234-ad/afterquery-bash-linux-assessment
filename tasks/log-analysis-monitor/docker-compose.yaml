@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${T_BENCH_TASK_DOCKER_CLIENT_IMAGE_NAME:-log-analysis-monitor}
+    container_name: ${T_BENCH_TASK_DOCKER_NAME_PREFIX}__log-analysis-client
+    working_dir: /app
+    command: ["tail", "-f", "/dev/null"]
+    volumes:
+      - ${T_BENCH_TASK_LOGS_PATH:-./logs}:${T_BENCH_CONTAINER_LOGS_PATH:-/app/logs}
+    environment:
+      - TEST_DIR=${T_BENCH_TEST_DIR:-/tests}
+    networks:
+      - log-analysis-network
+
+networks:
+  log-analysis-network:
+    name: ${T_BENCH_TASK_DOCKER_NAME_PREFIX}__log-analysis-network
+    driver: bridge
